@@ -5,7 +5,7 @@
     "version": "0.1.0",
     "repository": {
         "type": "git",
-        "url": "git://github.com/snd/conduct.git"
+        "url": "git://github.com/snd/node-conduct.git"
     },
     "dependencies": {
     },
