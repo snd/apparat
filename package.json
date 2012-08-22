@@ -1,0 +1,14 @@
+{
+    "name": "conduct",
+    "description": "",
+    "author": "Maximilian Krüger <kruemaxi@googlemail.com> (http://github.com/snd)",
+    "version": "0.1.0",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/snd/conduct.git"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+}
