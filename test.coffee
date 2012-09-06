@@ -60,7 +60,6 @@ module.exports =
         'events are received in the order they are defined': (test) ->
             {receive, send, onError, debug} = new Mesh
             onError (err) -> test.fail()
-            debug console.log
             receive 'my-other-event', 'my-event', (otherResult, result) ->
                 test.equal result, 'my-result'
                 test.equal otherResult, 'my-other-result'
@@ -69,79 +68,6 @@ module.exports =
                 send('my-event') null, 'my-result'
                 process.nextTick ->
                     send('my-other-event') null, 'my-other-result'
-
-    'collected events':
-
-        'error is handled': (test) ->
-            {receive, send, onError} = new Mesh
-            onError (err) ->
-                test.equal err, 'this-is-an-error'
-                test.done()
-            receive 'my-event', -> test.fail()
-            send(10, 'my-event') 'this-is-an-error'
-
-        "can't call collector twice": (test) ->
-            {receive, send, onError} = new Mesh
-            onError -> test.fail()
-            receive 'my-event', -> test.fail()
-            collector = send(3, 'my-event')
-            collector()
-            test.throws -> collector()
-            test.done()
-
-        'receive is not called on first of three collects': (test) ->
-            {receive, send, onError} = new Mesh
-            onError -> test.fail()
-            receive 'my-event', -> test.fail()
-            send(3, 'my-event') null, 'my-first-result'
-            send(3, 'my-event') null, 'my-second-result'
-            test.done()
-
-        'receive is called': (test) ->
-            {receive, send, onError} = new Mesh
-            onError -> test.fail()
-            receive 'my-event', (results) ->
-                test.deepEqual results, [
-                    'my-first-result'
-                    'my-second-result'
-                    'my-third-result'
-                ]
-            send(3, 'my-event') null, 'my-first-result'
-            send(3, 'my-event') null, 'my-second-result'
-            send(3, 'my-event') null, 'my-third-result'
-            test.done()
-
-        'keep order of collectors': (test) ->
-            {receive, send, onError} = new Mesh
-            onError -> test.fail()
-            test.expect 1
-            receive 'my-event', (results) ->
-                test.deepEqual results, [
-                    'my-first-result'
-                    'my-second-result'
-                    'my-third-result'
-                ]
-            firstCollector = send 3, 'my-event'
-            secondCollector = send 3, 'my-event'
-            thirdCollector = send 3, 'my-event'
-
-            thirdCollector null, 'my-third-result'
-            firstCollector null, 'my-first-result'
-            secondCollector null, 'my-second-result'
-
-            test.done()
-
-        'send with 0 calls event immediately with empty array': (test) ->
-            {receive, send, onError} = new Mesh
-            onError -> test.fail()
-            test.expect 1
-            receive 'my-event', (results) ->
-                test.deepEqual results, []
-
-            send 0, 'my-event'
-
-            test.done()
-
     'throw':
 
         'type error':
