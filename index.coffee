@@ -4,7 +4,6 @@ module.exports = class
 
     constructor: ->
         @_eventCallbacks = {}
-        @_collections = {}
         @_failed = false
         @_nextId = 1
 
@@ -62,10 +61,10 @@ module.exports = class
                 received[index] = result
                 receivedCount++
                 if receivedCount is events.length
-                    @_debug "[#{events.join ', '}] ------> ##{id}"
+                    @_debug "##{id} receiving [#{events.join ', '}]"
                     cb received...
 
-        @_debug "##{id} is receiver for [#{events.join ', '}]"
+        @_debug "##{id} receiver for [#{events.join ', '}]"
 
     send: (event) =>
         unless typeof event is 'string'
@@ -90,7 +89,7 @@ module.exports = class
 
         cb = (err, result) =>
             if @_failed
-                @_debug "instance failed: not forwarding [#{event}]"
+                @_debug "failed apparat: not forwarding [#{event}]"
                 return
 
             if called
@@ -101,7 +100,7 @@ module.exports = class
                 throw new Error "[#{event}] already sent"
 
             if err?
-                @_debug "##{id} ---[#{event} ✖]-->"
+                @_debug "##{id} sending [#{event}] ✖"
                 @_failed = true
                 if not @_onError?
                     throw new Error """
@@ -110,7 +109,7 @@ module.exports = class
                     """
                 @_onError err
             else
-                @_debug "##{id} ---[#{event} ✔]-->"
+                @_debug "##{id} sending [#{event}] ✔"
                 callbacks = @_eventCallbacks[event]
                 if not callbacks?
                     throw new Error """
@@ -121,5 +120,6 @@ module.exports = class
                 # mark event as sent
                 @_eventCallbacks[event] = false
                     # TODO nextTick??
-        @_debug "##{id} is sender for [#{event}]"
-        cb
+        @_debug "##{id} sender for [#{event}]"
+
+        return cb
