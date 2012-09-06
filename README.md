@@ -1,6 +1,6 @@
 # Apparat
 
-a simple yet powerful way to organize async code
+simple yet powerful way to organize async code
 
 #### Install
 
