@@ -1,11 +1,11 @@
-Mesh = require './index'
+Apparat = require './index'
 
 module.exports =
 
     'single event':
 
-        'error in mesh triggers callback that was passed to onError': (test) ->
-            {receive, send, onError} = new Mesh
+        'error triggers callback that was passed to onError': (test) ->
+            {receive, send, onError} = new Apparat
             onError (err) ->
                 test.equal err, 'this-is-an-error'
                 test.done()
@@ -13,13 +13,13 @@ module.exports =
             send('my-event') 'this-is-an-error'
 
         'send triggers receive': (test) ->
-            {receive, send, onError} = new Mesh
+            {receive, send, onError} = new Apparat
             onError -> test.fail()
             receive 'my-event', -> test.done()
             send('my-event')()
 
         'value passed to send is passed to receive': (test) ->
-            {receive, send, onError} = new Mesh
+            {receive, send, onError} = new Apparat
             onError (err) -> test.fail()
             receive 'my-event', (result) ->
                 test.equal result, 'my-result'
@@ -27,7 +27,7 @@ module.exports =
             send('my-event') null, 'my-result'
 
         "send doesn't trigger other events": (test) ->
-            {receive, send, onError} = new Mesh
+            {receive, send, onError} = new Apparat
             onError -> test.fail()
             receive 'my-first-event', -> test.fail()
             receive 'my-second-event', -> test.done()
@@ -37,7 +37,7 @@ module.exports =
     'many events':
 
         'error is received by onError': (test) ->
-            {receive, send, onError} = new Mesh
+            {receive, send, onError} = new Apparat
             onError (err) ->
                 test.equal err, 'this-is-an-error'
                 test.done()
@@ -46,7 +46,7 @@ module.exports =
             send('my-event-with-error') 'this-is-an-error'
 
         'receive is triggered after both events have been send': (test) ->
-            {receive, send, onError, debug} = new Mesh
+            {receive, send, onError, debug} = new Apparat
             onError (err) -> test.fail()
             receive 'my-event', 'my-other-event', (result, otherResult) ->
                 test.equal result, 'my-result'
@@ -58,7 +58,7 @@ module.exports =
                     send('my-other-event') null, 'my-other-result'
 
         'events are received in the order they are defined': (test) ->
-            {receive, send, onError, debug} = new Mesh
+            {receive, send, onError, debug} = new Apparat
             onError (err) -> test.fail()
             receive 'my-other-event', 'my-event', (otherResult, result) ->
                 test.equal result, 'my-result'
@@ -73,13 +73,13 @@ module.exports =
         'type error':
 
             'when an invalid error callback is registered': (test) ->
-                {receive, send, onError} = new Mesh
+                {receive, send, onError} = new Apparat
                 test.throws ->
                     onError 'this-should-be-a-function'
                 test.done()
 
             'when an invalid receive callback is registered': (test) ->
-                {receive, send, onError} = new Mesh
+                {receive, send, onError} = new Apparat
                 test.throws ->
                     receive {}, -> test.fail()
                 test.throws ->
@@ -87,7 +87,7 @@ module.exports =
                 test.done()
 
             'when an invalid send is registered': (test) ->
-                {receive, send, onError} = new Mesh
+                {receive, send, onError} = new Apparat
                 receive 'event', -> test.fail()
                 test.throws -> send {}
                 test.done()
@@ -95,19 +95,19 @@ module.exports =
         'error':
 
             'when send is called on event for which no callback was registered': (test) ->
-                {receive, send} = new Mesh
+                {receive, send} = new Apparat
                 test.throws -> send('my-event') null, 'my-result'
                 test.done()
 
             'on fail if no failure callback is registered': (test) ->
-                {receive, send} = new Mesh
+                {receive, send} = new Apparat
                 receive 'my-event', -> test.fail()
                 test.throws ->
                     send('my-event') 'error'
                 test.done()
 
             'when receive is called on failed conduct': (test) ->
-                {receive, send, onError} = new Mesh
+                {receive, send, onError} = new Apparat
                 test.expect 2
                 onError (err) ->
                     test.ok true
@@ -118,7 +118,7 @@ module.exports =
                 send('my-event') 'this is an error'
 
             'when event is send multiple times through the same sender': (test) ->
-                {receive, send, onError} = new Mesh
+                {receive, send, onError} = new Apparat
                 onError -> test.fail()
                 test.expect 2
                 receive 'my-event', (result) ->
@@ -129,7 +129,7 @@ module.exports =
                 test.done()
 
             'when event is send multiple times through different senders': (test) ->
-                {receive, send, onError} = new Mesh
+                {receive, send, onError} = new Apparat
                 onError -> test.fail()
                 test.expect 2
                 receive 'my-event', (result) ->
