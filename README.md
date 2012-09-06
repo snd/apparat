@@ -6,12 +6,13 @@ a simple yet powerful way to organize async code
 
     npm install apparat
 
-#### Usage Example
+#### Example usage
 
 read domain from file `domain.txt`.
-in parallel
+
 write resolved IPV4 addresses to `addresses4.txt` and
-write resolved IPV6 addresses to `addresses6.txt`.
+write resolved IPV6 addresses to `addresses6.txt` in parallel.
+
 remove `domain.txt` when both files have been written successfully.
 
 ```coffeescript
