@@ -6,7 +6,7 @@ a simple yet powerful way to organize async code
 
     npm install apparat
 
-#### Example usage
+#### Example
 
 read domain from file `domain.txt`.
 
