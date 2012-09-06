@@ -1,6 +1,6 @@
 {
     "name": "apparat",
-    "description": "",
+    "description": "a simple yet powerful way to organize async code",
     "author": "Maximilian Krüger <kruemaxi@googlemail.com> (http://github.com/snd)",
     "version": "0.1.1",
     "repository": {
