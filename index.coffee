@@ -104,7 +104,7 @@ module.exports = class
                 @_failed = true
                 if not @_onError?
                     throw new Error """
-                        signal for "#{event}" failed with "#{err}"
+                        send for "#{event}" failed with "#{err}"
                         but no onError callback was registered
                     """
                 @_onError err
@@ -113,7 +113,7 @@ module.exports = class
                 callbacks = @_eventCallbacks[event]
                 if not callbacks?
                     throw new Error """
-                        "#{event}" was signalled
+                        "#{event}" was sent
                         but no callbacks were found
                     """
                 callbacks.forEach (cb) -> cb result
