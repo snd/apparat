@@ -1,12 +1,14 @@
-# Apparat
+# apparat
 
-simple yet powerful way to organize async code
+[![Build Status](https://travis-ci.org/snd/apparat.png)](https://travis-ci.org/snd/apparat)
 
-#### Install
+apparat is a simple but powerful way to organize async code for nodejs
+
+### install
 
     npm install apparat
 
-#### Example
+### use
 
 read domain from file `domain.txt`.
 
@@ -19,9 +21,9 @@ remove `domain.txt` when both files have been written successfully.
 fs = require 'fs'
 dns = require 'dns'
 
-Apparat = require 'apparat'
+apparat = require 'apparat'
 
-{receive, send, onError, debug} = new Apparat
+{receive, send, onError, debug} = apparat
 
 debug console.log
 onError (err) -> throw err
@@ -47,4 +49,4 @@ receive 'deleted', ->
     console.log 'OK'
 ```
 
-#### License: MIT
+#### license: MIT
