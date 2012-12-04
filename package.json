@@ -1,6 +1,6 @@
 {
     "name": "apparat",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "apparat is a simple but powerful way to organize async code for nodejs",
     "homepage": "http://github.com/snd/apparat",
     "author": {
