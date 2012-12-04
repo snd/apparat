@@ -1,4 +1,4 @@
-module.exports = class
+Apparat = class
 
     nextId: -> @_nextId++
 
@@ -123,3 +123,5 @@ module.exports = class
         @_debug "##{id} sender for [#{event}]"
 
         return cb
+
+module.exports = -> new Apparat
