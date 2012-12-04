@@ -1,3 +1,6 @@
 example.coffee
 npm-debug.log
 node_modules/**
+domain.txt
+addresses4.txt
+addresses6.txt
