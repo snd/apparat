@@ -1,14 +1,29 @@
 {
     "name": "apparat",
-    "description": "a simple yet powerful way to organize async code",
-    "author": "Maximilian Krüger <kruemaxi@googlemail.com> (http://github.com/snd)",
     "version": "0.1.1",
+    "description": "apparat is a simple but powerful way to organize async code for nodejs",
+    "homepage": "http://github.com/snd/apparat",
+    "author": {
+        "name": "Maximilian Krüger",
+        "email": "kruemaxi@gmail.com",
+        "url": "http://github.com/snd"
+    },
+    "bugs": {
+        "url": "http://github.com/snd/apparat/issues",
+        "email": "kruemaxi@gmail.com"
+    },
     "repository": {
         "type": "git",
         "url": "git://github.com/snd/apparat.git"
     },
-    "dependencies": {
+    "licenses": {
+        "type": "MIT",
+        "url": "git://github.com/snd/apparat/LICENSE"
+    },
+    "engines": {
+        "node": ">=0.8.5"
     },
     "devDependencies": {
+        "nodeunit": "0.7.4"
     }
 }
