@@ -37,10 +37,10 @@ receive 'contents', (contents) ->
     dns.resolve6 domain, send 'addresses6'
 
 receive 'addresses4', (addresses) ->
-    fs.writeFile 'adresses4.txt', addresses.join('\n'), send 'addresses4 written'
+    fs.writeFile 'addresses4.txt', addresses.join('\n'), send 'addresses4 written'
 
 receive 'addresses6', (addresses) ->
-    fs.writeFile 'adresses6.txt', addresses.join('\n'), send 'addresses6 written'
+    fs.writeFile 'addresses6.txt', addresses.join('\n'), send 'addresses6 written'
 
 receive 'addresses4 written', 'addresses6 written', ->
     fs.unlink 'domain.txt', send 'deleted'
