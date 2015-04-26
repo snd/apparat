@@ -1,4 +1,4 @@
-# apparat
+# apparat (deprecated)
 
 [![Build Status](https://travis-ci.org/snd/apparat.png)](https://travis-ci.org/snd/apparat)
 
