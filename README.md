@@ -1,4 +1,6 @@
-# apparat (deprecated)
+# apparat (DISCONTINUED!)
+
+**this was an experiment. don't use it. [promises](https://github.com/petkaantonov/bluebird) are a much better way to organize async code in nodejs!**
 
 [![Build Status](https://travis-ci.org/snd/apparat.png)](https://travis-ci.org/snd/apparat)
 
